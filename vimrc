@@ -6,14 +6,32 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 filetype plugin indent on
 
+" 代码片段
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" 放到.vim/additional_snippets文件夹下
+let g:UltiSnipsSnippetDirectories=["additional_snippets", 'UltiSnips']
+
 Bundle 'nvie/vim-flake8'
 Bundle 'Yggdroot/indentLine'
 Bundle 'Raimondi/delimitMate'
 "Bundle 'cschlueter/vim-mustang'
 "Bundle 'godlygeek/csapprox'
 Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
+
+" 自动补全html标签
+Bundle 'docunext/closetag.vim'
+let g:closetag_html_style=1
+
+" 状态栏强化
+Bundle 'bling/vim-airline'
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -71,6 +89,7 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+" 显示行数
 set nu
 "set autoindent
 "set smartindent
@@ -84,11 +103,15 @@ set colorcolumn=80
 set list
 set listchars=tab:▸▸,eol:¬,extends:»,precedes:«
 
-"set t_Co=256
 set so=3
 
+" 搜索时忽略大小写
+set ignorecase
+" 高亮搜索词
 set hlsearch
+" 突出当前行
 set cursorline
+" tab键
 set shiftwidth=4
 set tabstop=4
 set expandtab
@@ -113,9 +136,28 @@ let g:pydiction_location = '/home/chenhj/Downloads/pydiction-1.2/complete-dict'
 
 "theme
 syntax enable
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
+"set background=dark
+"colorscheme solarized
+colorscheme molokai
+set t_Co=256
+
+hi! link SignColumn LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange
+
+" 显示增强-主题
+Bundle 'altercation/vim-colors-solarized'
+"let g:solarized_termtrans=1
+"let g:solarized_contrast="normal"
+"let g:solarized_visibility="normal"
+
+Bundle 'tomasr/molokai'
+let g:molokai_original = 1
+"let g:rehash256 = 1
+
+" syntastic
+let g:syntastic_check_on_open=1
+let g:synctastic_python_checkers=['pyflakes']
 
 "parentheses
 let g:rbpt_colorpairs = [
@@ -142,3 +184,27 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" 保存py文件时删除多余空格
+func! DeleteTrailingWS()
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+
+" 自动插入文件头
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+func! AutoSetFileHead()
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    if &filetype == 'python'
+        call setline(1, "\# coding:utf8")
+    endif
+
+endfunc
+
+" 代码补全
+"Bundle 'Valloric/YouCompleteMe'
