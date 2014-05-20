@@ -9,8 +9,11 @@ filetype plugin indent on
 Bundle 'nvie/vim-flake8'
 Bundle 'Yggdroot/indentLine'
 Bundle 'Raimondi/delimitMate'
-Bundle 'cschlueter/vim-mustang'
-Bundle 'godlygeek/csapprox'
+"Bundle 'cschlueter/vim-mustang'
+"Bundle 'godlygeek/csapprox'
+Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/rainbow_parentheses.vim'
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -75,13 +78,14 @@ set ruler
 set showcmd
 set showmatch
 set wrap
-"set textwidth=80
+set textwidth=80
 set colorcolumn=80
-highlight ColorColumn ctermbg=110 guibg=#2c2d27
+"highlight ColorColumn ctermbg=110 guibg=#2c2d27
 set list
 set listchars=tab:▸▸,eol:¬,extends:»,precedes:«
 
-set t_Co=88
+"set t_Co=256
+set so=3
 
 set hlsearch
 set cursorline
@@ -101,4 +105,40 @@ let g:winManagerWindowLayout='FileExplorer'
 map <F4> :TlistToggle<cr>
 
 nmap wm :WMToggle<cr>
-map <F5> :WMToggle<cr>
+map <F6> :WMToggle<cr>
+
+"pydiction
+filetype plugin on
+let g:pydiction_location = '/home/chenhj/Downloads/pydiction-1.2/complete-dict'
+
+"theme
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+
+"parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown', 'RoyalBlue3'],
+    \ ['Darkblue', 'SeaGreen3'],
+    \ ['darkgray', 'DarkOrchid3'],
+    \ ['darkgreen', 'firebrick3'],
+    \ ['darkcyan', 'RoyalBlue3'],
+    \ ['darkred', 'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown', 'firebrick3'],
+    \ ['gray', 'RoyalBlue3'],
+    \ ['black', 'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue', 'firebrick3'],
+    \ ['darkgreen', 'RoyalBlue3'],
+    \ ['darkcyan', 'SeaGreen3'],
+    \ ['darkred', 'DarkOrchid3'],
+    \ ['red', 'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
