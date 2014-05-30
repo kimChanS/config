@@ -97,7 +97,7 @@ set ruler
 set showcmd
 set showmatch
 set wrap
-set textwidth=80
+"set textwidth=80
 set colorcolumn=80
 "highlight ColorColumn ctermbg=110 guibg=#2c2d27
 set list
@@ -130,10 +130,6 @@ map <F4> :TlistToggle<cr>
 nmap wm :WMToggle<cr>
 map <F6> :WMToggle<cr>
 
-"pydiction
-filetype plugin on
-let g:pydiction_location = '/home/chenhj/Downloads/pydiction-1.2/complete-dict'
-
 "theme
 syntax enable
 "set background=dark
@@ -158,6 +154,7 @@ let g:molokai_original = 1
 " syntastic
 let g:syntastic_check_on_open=1
 let g:synctastic_python_checkers=['pyflakes']
+let g:syntastic_python_flake8_args="--ignore=E501,E126,E128,E401,E701,E265"
 
 "parentheses
 let g:rbpt_colorpairs = [
