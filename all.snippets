@@ -1,0 +1,57 @@
+# Global snippets
+
+
+
+snippet date
+`!v strftime("%Y-%m-%d %H:%M:%S")`
+endsnippet
+
+snippet datez
+`!v strftime("%Y-%m-%d %H:%M:%S %z")`
+endsnippet
+
+snippet sdate
+`!v strftime("%Y.%m.%d")`
+endsnippet
+
+# python snippets
+
+########### header and bottom
+snippet code
+# coding: utf-8
+endsnippet
+
+snippet main
+if __name__ == '__main__':
+    ${1}
+endsnippet
+
+########### import
+snippet im
+import ${1}
+endsnippet
+
+snippet from
+from ${1} import ${2}
+endsnippet
+
+
+snippet author
+# *******************************************
+# author: chj
+# create: `!v strftime("%Y-%m-%d %H:%M:%S")`
+# note: 
+# *******************************************
+endsnippet
+
+snippet endblock
+{% endblock %}
+endsnippet
+
+snippet block
+{% block ${1} %}
+endsnippet
+
+snippet extends
+{% extends ${1} %}
+endsnippet

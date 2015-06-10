@@ -9,8 +9,8 @@ filetype plugin indent on
 " 代码片段
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<F5>"
+let g:UltiSnipsJumpForwardTrigger = "<F5>"
 " 放到.vim/additional_snippets文件夹下
 let g:UltiSnipsSnippetDirectories=["additional_snippets", 'UltiSnips']
 
@@ -130,6 +130,17 @@ map <F4> :TlistToggle<cr>
 nmap wm :WMToggle<cr>
 map <F6> :WMToggle<cr>
 
+set pastetoggle=<F12>
+
+function! <SID>ToggleWindowsManager()  
+   if IsWinManagerVisible()  
+      call s:CloseWindowsManager()  
+   else  
+      call s:StartWindowsManager()  
+      exe 'q'  
+   end  
+endfunction  
+
 "theme
 syntax enable
 "set background=dark
@@ -154,7 +165,10 @@ let g:molokai_original = 1
 " syntastic
 let g:syntastic_check_on_open=1
 let g:synctastic_python_checkers=['pyflakes']
-let g:syntastic_python_flake8_args="--ignore=E501,E126,E128,E401,E701,E265"
+let g:syntastic_always_populate_loc_list = 1
+let mapleader = ","
+nmap <leader>p :lprev<cr>
+nmap <leader>n :lnext<cr>
 
 "parentheses
 let g:rbpt_colorpairs = [
@@ -203,5 +217,10 @@ func! AutoSetFileHead()
 
 endfunc
 
+" pep8
+let g:syntastic_python_flake8_args="--ignore=E501,E126,E128,E401,E302"
+
 " 代码补全
-"Bundle 'Valloric/YouCompleteMe'
+let g:pydiction_location = '/home/chenhj/.vim/bundle/pydiction/complete-dict'
+
+hi Normal ctermfg=252 ctermbg=None
